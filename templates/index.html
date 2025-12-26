@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhoAmI - IP Information</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 50%, #0f0f23 100%);
+            min-height: 100vh;
+            color: #e0e0e0;
+            padding: 2rem;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(90deg, #00d9ff, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #888;
+            margin-bottom: 2rem;
+        }
+        
+        .ip-hero {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+        }
+        
+        .ip-hero .label {
+            font-size: 0.9rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+        
+        .ip-hero .ip {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #00d9ff;
+            text-shadow: 0 0 30px rgba(0, 217, 255, 0.3);
+        }
+        
+        .section {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+        
+        .section-title {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem 1.5rem;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #a855f7;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .section-content {
+            padding: 1rem 1.5rem;
+        }
+        
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .info-row:last-child {
+            border-bottom: none;
+        }
+        
+        .info-key {
+            color: #888;
+            font-size: 0.9rem;
+        }
+        
+        .info-value {
+            color: #00d9ff;
+            font-size: 0.9rem;
+            text-align: right;
+            word-break: break-all;
+            max-width: 60%;
+        }
+        
+        .headers-grid {
+            display: grid;
+            gap: 0.5rem;
+        }
+        
+        .header-item {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+        }
+        
+        .header-item .key {
+            color: #a855f7;
+            margin-right: 0.5rem;
+        }
+        
+        .header-item .value {
+            color: #e0e0e0;
+            word-break: break-all;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            color: #555;
+            font-size: 0.8rem;
+        }
+        
+        @media (max-width: 600px) {
+            body { padding: 1rem; }
+            h1 { font-size: 1.8rem; }
+            .ip-hero .ip { font-size: 1.8rem; }
+            .info-row { flex-direction: column; gap: 0.25rem; }
+            .info-value { text-align: left; max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌐 WhoAmI</h1>
+        <p class="subtitle">Your IP & Request Information</p>
+        
+        <div class="ip-hero">
+            <div class="label">Your IP Address</div>
+            <div class="ip">{{ ip_info.client_ip }}</div>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">📍 IP Information</div>
+            <div class="section-content">
+                <div class="info-row">
+                    <span class="info-key">Client IP</span>
+                    <span class="info-value">{{ ip_info.client_ip }}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-key">Remote Address</span>
+                    <span class="info-value">{{ ip_info.remote_addr }}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-key">X-Forwarded-For</span>
+                    <span class="info-value">{{ ip_info.x_forwarded_for }}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-key">X-Real-IP</span>
+                    <span class="info-value">{{ ip_info.x_real_ip }}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-key">X-Forwarded-Proto</span>
+                    <span class="info-value">{{ ip_info.x_forwarded_proto }}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-key">X-Forwarded-Host</span>
+                    <span class="info-value">{{ ip_info.x_forwarded_host }}</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">🔗 Request Details</div>
+            <div class="section-content">
+                <div class="info-row">
+                    <span class="info-key">Method</span>
+                    <span class="info-value">{{ request_info.method }}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-key">Scheme</span>
+                    <span class="info-value">{{ request_info.scheme }}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-key">Host</span>
+                    <span class="info-value">{{ request_info.host }}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-key">Path</span>
+                    <span class="info-value">{{ request_info.path }}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-key">Full URL</span>
+                    <span class="info-value">{{ request_info.url }}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-key">User Agent</span>
+                    <span class="info-value">{{ request_info.user_agent }}</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">📋 All Headers</div>
+            <div class="section-content">
+                <div class="headers-grid">
+                    {% for key, value in headers.items() %}
+                    <div class="header-item">
+                        <span class="key">{{ key }}:</span>
+                        <span class="value">{{ value }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            Powered by Flask & Caddy • whoami.teej.sh
+        </footer>
+    </div>
+</body>
+</html>

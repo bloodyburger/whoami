@@ -1,0 +1,11 @@
+whoami.teej.sh {
+    reverse_proxy whoami:8080
+    encode gzip
+    
+    header {
+        # Security headers
+        X-Content-Type-Options nosniff
+        X-Frame-Options DENY
+        Referrer-Policy strict-origin-when-cross-origin
+    }
+}

@@ -1,0 +1,36 @@
+# Production docker-compose for Ubuntu server
+# Uses pre-built image from GitHub Container Registry
+
+services:
+  whoami:
+    image: ghcr.io/bloodyburger/whoami:latest
+    container_name: whoami-app
+    expose:
+      - "8080"
+    restart: unless-stopped
+    networks:
+      - web
+
+  caddy:
+    image: caddy:alpine
+    container_name: whoami-caddy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    restart: unless-stopped
+    networks:
+      - web
+    depends_on:
+      - whoami
+
+networks:
+  web:
+    driver: bridge
+
+volumes:
+  caddy_data:
+  caddy_config:
