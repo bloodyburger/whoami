@@ -157,6 +157,51 @@
         <div class="ip-hero">
             <div class="label">Your IP Address</div>
             <div class="ip">{{ ip_info.client_ip }}</div>
+            <div class="location" style="margin-top: 1rem; font-size: 1.2rem; color: #a855f7;">
+                📍 {{ geo_info.city }}, {{ geo_info.region }}, {{ geo_info.country }} {{ geo_info.countryCode }}
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">🌍 Geolocation</div>
+            <div class="section-content">
+                <div class="info-row">
+                    <span class="info-key">Country</span>
+                    <span class="info-value">{{ geo_info.country }} ({{ geo_info.countryCode }})</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-key">Region</span>
+                    <span class="info-value">{{ geo_info.region }}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-key">City</span>
+                    <span class="info-value">{{ geo_info.city }}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-key">ZIP Code</span>
+                    <span class="info-value">{{ geo_info.zip }}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-key">Coordinates</span>
+                    <span class="info-value">{{ geo_info.lat }}, {{ geo_info.lon }}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-key">Timezone</span>
+                    <span class="info-value">{{ geo_info.timezone }}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-key">ISP</span>
+                    <span class="info-value">{{ geo_info.isp }}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-key">Organization</span>
+                    <span class="info-value">{{ geo_info.org }}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-key">AS Number</span>
+                    <span class="info-value">{{ geo_info.as }}</span>
+                </div>
+            </div>
         </div>
         
         <div class="section">
